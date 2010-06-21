@@ -1,0 +1,9 @@
+*.pyc
+*.pid
+*.sock
+*.project
+*.pydev
+*.pydevproject
+*.DS_Store
+RUN
+Thumbs.db
