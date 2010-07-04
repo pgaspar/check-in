@@ -28,4 +28,19 @@ def add_place(request):
 	return render(request, 'create_place.html', {'form': form})
 	
 def check_in(request):
-	pass
+	places = Place.objects.all()
+	
+	if request.method == 'POST':
+		POST = request.POST.copy()
+		POST['user'] = request.user.id
+		
+		form = CheckInForm(POST)
+		
+		if form.is_valid():
+			new_check_in = form.save()
+			return HttpResponseRedirect( reverse('activity-page') )
+	
+	else:
+		form = CheckInForm()
+	
+	return render(request, 'check_in.html', {'form': form, 'places': places})

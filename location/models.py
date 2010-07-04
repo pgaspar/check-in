@@ -12,7 +12,7 @@ class Place(models.Model):
 	geo_lon = models.DecimalField('longitude', max_digits=20, decimal_places=15)
 	
 	def __unicode__(self):
-		return u"Place"
+		return u"%s" %(self.name)
 
 class CheckIn(models.Model):
 	"""Model representing a Check-In"""

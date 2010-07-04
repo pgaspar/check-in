@@ -5,8 +5,12 @@ function success(position) {
 	geo_lat = position.coords.latitude;
 	geo_lon = position.coords.longitude;
 	
-	document.getElementById("id_geo_lat").value = geo_lat;
-	document.getElementById("id_geo_lon").value = geo_lon;
+	if (document.getElementById("id_geo_lat")) {
+		document.getElementById("id_geo_lat").value = geo_lat;
+		document.getElementById("id_geo_lon").value = geo_lon;
+	}
+	
+	spawnMap();
 }
 
 function error(msg) {

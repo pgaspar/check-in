@@ -12,5 +12,8 @@ class PlaceForm(ModelForm):
 
 class CheckInForm(ModelForm):
 	
+	location = forms.ModelChoiceField(Place, widget=forms.HiddenInput)
+	
 	class Meta:
 		model = CheckIn
+		exclude = ('user',)
