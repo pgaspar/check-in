@@ -32,7 +32,7 @@ def check_in(request):
 	
 	if request.method == 'POST':
 		POST = request.POST.copy()
-		POST['user'] = request.user.id
+		POST['user'] = str(request.user.id)
 		
 		form = CheckInForm(POST)
 		
@@ -41,6 +41,6 @@ def check_in(request):
 			return HttpResponseRedirect( reverse('activity-page') )
 	
 	else:
-		form = CheckInForm()
+		form = CheckInForm(initial={'user': request.user.id})
 	
 	return render(request, 'check_in.html', {'form': form, 'places': places})

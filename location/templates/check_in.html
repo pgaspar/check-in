@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Check-In</h1>
+	
+	<div id="map"></div>
+	
+	<div class="map-options">
+		<a href="{% url add-place %}">Add a new Place</a>
+	</div>
+	
+	<div id="check-in-preview" class="help-text">Please choose a Place to check-in.</div>
+	
+	<form action="" method="post">
+		{{ form.as_table }}
+		
+		<input type="submit" value="Check-In">
+	</form>
+	
+	<script type="text/javascript" charset="utf-8">
+		function loadPlaces() {
+			{% for place in places %}
+				var latlng = new google.maps.LatLng({{ place.geo_lat }}, {{ place.geo_lon }});
+
+				var marker = new google.maps.Marker({
+					position: latlng,
+					map: map,
+					title: "{{ place.name }}"
+				});
+				
+				google.maps.event.addListener(marker, 'click', function() {
+				    document.getElementById("id_location").value = "{{ place.id }}";
+					document.querySelector("#check-in-preview").innerHTML = "Checking-In at {{ place.name }}.";
+				  });
+			{% endfor %}
+		}
+	</script>
+{% endblock %}
